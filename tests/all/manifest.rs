@@ -648,7 +648,7 @@ fn write_package_json_over(existing: &str) -> Option<HashMap<String, String>> {
     let fixture = fixture::js_hello_world();
     let out_dir = fixture.path.join("pkg");
     let crate_data = manifest::CrateData::new(&fixture.path, None).unwrap();
-    wasm_pack::command::utils::create_pkg_dir(&out_dir).unwrap();
+    fs::create_dir_all(&out_dir).unwrap();
     fs::write(out_dir.join("package.json"), existing).unwrap();
     crate_data
         .write_package_json(&out_dir, &None, false, Target::Bundler)
